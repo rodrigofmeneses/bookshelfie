@@ -1,4 +1,6 @@
+import mongoose from "mongoose"
 import authors from "../models/author.js"
+import books from "../models/book.js"
 
 class AuthorController {
   /**
@@ -21,6 +23,16 @@ class AuthorController {
         res.status(200).json(authors)
       }
     })
+  }
+
+  static getBooksByAuthor = (req, res) => {
+    const id = req.params.id;
+
+    books.find({ "author": mongoose.Types.ObjectId(id) })
+      .populate('author')
+      .exec((err, books) => {
+        res.status(200).json(books)
+      })
   }
 
   static addAuthor = (req, res) => {
