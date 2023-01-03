@@ -7,11 +7,9 @@ const routes = (app) => {
         res.status(200).send('Node Course');
     })
 
-    app.use(
-        express.json(),
-        books,
-        authors
-    )
+    app.use(express.json())
+    app.use('/books', books)
+    app.use('/authors/', authors)
 }
 
 export default routes;
