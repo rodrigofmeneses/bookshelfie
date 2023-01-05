@@ -1,73 +1,58 @@
-import books from "../models/book.js";
+import BookService from "../services/booksService.js";
 
-class BookController {
+const BookController = {
   /**
    * Controller of book resource
    */
 
-  static getBooks = (_, res) => {
-    books.find()
-      .populate('author')
-      .exec((err, books) => {
-        res.status(200).json(books)
-      })
-  }
+  async getBooks(req, res) {
 
-  static getBook = (req, res) => {
+    try {
+      const result = await BookService.findAllBooks()
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(500).json({ message: "Something Wrong" })
+    }
+  },
+
+  async getBook(req, res) {
     const id = req.params.id;
+    try {
+      const result = await BookService.findBookById(id)
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(404).json({ message: `Book not found - ${error.message}` })
+    }
+  },
 
-    books.findById(id)
-      .populate('author', 'name')
-      .exec((err, books) => {
-        if (err) {
-          res.status(400).send({ message: `${err.message} - Id not found` });
-        } else {
-          res.status(200).json(books)
-        }
-      })
-  }
+  async addBook(req, res) {
+    try {
+      const result = await BookService.addBook(req.body);
+      res.status(201).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to add book - ${error.message}` })
+    }
+  },
 
-  static addBook = (req, res) => {
-    let book = new books(req.body);
+  async updateBook(req, res) {
+    try {
+      const result = await BookService.updateBook(req.params.id, req.body);
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to update book - ${error.message}` })
+    }
+  },
 
-    book.save((err) => {
-      if (err) {
-        res.status(500).send({ message: `${err.message} - Fail to add book` });
-      } else {
-        res.status(201).send(book.toJSON());
+  async removeBook(req, res) {
+    try {
+      const result = await BookService.removeBook(req.params.id);
+      if (!result) {
+        res.status(404).json({ message: `Book not found` })
       }
-    })
-  }
-
-  static updateBook = (req, res) => {
-    const id = req.params.id;
-
-    books.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Book updated' })
-      } else {
-        res.status(500).send({ message: err.message })
-      }
-    })
-  }
-
-  static removeBook = (req, res) => {
-    const id = req.params.id;
-
-    books.findByIdAndDelete(id, (err) => {
-      if (err) {
-        res.status(400).send({ message: err.message })
-      }
-      res.status(200).send({ message: 'Book removed' })
-    })
-  }
-
-  static getBooksByTitle = (req, res) => {
-    const title = req.query.title
-
-    books.find({ 'title': title }, {}, (err, books) => {
-      res.status(200).send(books)
-    })
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to remove book - ${error.message}` })
+    }
   }
 
 }
