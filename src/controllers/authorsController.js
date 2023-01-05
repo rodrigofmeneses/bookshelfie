@@ -1,75 +1,73 @@
-import mongoose from "mongoose"
-import authors from "../models/author.js"
-import books from "../models/book.js"
+import AuthorService from "../services/authorsService.js"
 
-class AuthorController {
+const AuthorController = {
   /**
    * Controller for author resource
    */
 
-  static getAuthors = (_, res) => {
-    authors.find((err, result) => {
+  async getAuthors(req, res) {
+    try {
+      const result = await AuthorService.findAllAuthors()
       res.status(200).json(result)
-    })
-  }
+    } catch (error) {
+      res.status(500).json({ message: "Something Wrong" })
+    }
+  },
 
-  static getAuthor = (req, res) => {
+  async getAuthor(req, res) {
     const id = req.params.id;
+    try {
+      const result = await AuthorService.findAuthorById(id)
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(404).json({ message: `Author not found - ${error.message}` })
+    }
+  },
 
-    authors.findById(id, (err, authors) => {
-      if (err) {
-        res.status(400).send({ message: `${err.message} - Id not found` });
-      } else {
-        res.status(200).json(authors)
-      }
-    })
-  }
-
-  static getBooksByAuthor = (req, res) => {
+  async getBooksByAuthor(req, res) {
     const id = req.params.id;
+    try {
+      const result = await AuthorService.findBooksByAuthorId(id)
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(404).json({ message: `Author not found - ${error.message}` })
+    }
 
-    books.find({ "author": mongoose.Types.ObjectId(id) })
-      .populate('author')
-      .exec((err, books) => {
-        res.status(200).json(books)
-      })
-  }
+  },
 
-  static addAuthor = (req, res) => {
-    let author = new authors(req.body);
+  async addAuthor(req, res) {
+    const body = req.body;
+    try {
+      const result = await AuthorService.addAuthor(body);
+      res.status(201).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to add author - ${error.message}` })
+    }
+  },
 
-    author.save((err) => {
-      if (err) {
-        res.status(500).send({ message: `${err.message} - Fail to add author` });
-      } else {
-        res.status(201).send(author.toJSON());
-      }
-    })
-  }
-
-  static updateAuthor = (req, res) => {
+  async updateAuthor(req, res) {
     const id = req.params.id;
+    const body = req.body;
+    try {
+      const result = await AuthorService.updateAuthor(id, body);
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to update author - ${error.message}` })
+    }
+  },
 
-    authors.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Author updated' })
-      } else {
-        res.status(500).send({ message: err.message })
-      }
-    })
-  }
-
-  static removeAuthor = (req, res) => {
+  async removeAuthor(req, res) {
     const id = req.params.id;
-
-    authors.findByIdAndDelete(id, (err) => {
-      if (err) {
-        res.status(400).send({ message: err.message })
+    try {
+      const result = await AuthorService.removeAuthor(id);
+      if (!result) {
+        res.status(404).json({ message: `Author not found` })
       }
-      res.status(200).send({ message: 'Author removed' })
-    })
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(400).json({ message: `Error to remove author - ${error.message}` })
+    }
   }
-
 }
 
 export default AuthorController
