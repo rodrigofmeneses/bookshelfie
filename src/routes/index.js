@@ -4,12 +4,12 @@ import books from "./booksRoutes.js";
 
 const routes = (app) => {
     app.route('/').get((req, res) => {
-        res.status(200).send('Node Course');
+        res.status(200).send('Bookshelfie');
     })
 
     app.use(express.json())
     app.use('/books', books)
-    app.use('/authors/', authors)
+    app.use('/authors', authors)
 }
 
 export default routes;

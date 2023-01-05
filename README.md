@@ -3,7 +3,7 @@
 
 ![BookShelfie Logo](assets/bookshelfie-logo.jpg)
 
-> RestFull API to manager your favorites books.
+> RestFull API to manage your favorites books.
 
 ---
 ## Technologies used:
@@ -23,7 +23,7 @@ npm install
 Create and configure `.env` file with this keys:
 
 ```js
-MONGODB_URL="localhost:127017" // your mongodb connection
+MONGODB_URL="localhost:127017/bookshelfie" // your mongodb connection
 PORT=1234 // 3000 by Default
 ```
 
