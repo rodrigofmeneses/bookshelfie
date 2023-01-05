@@ -1,10 +1,10 @@
-import express from "express";
-import authors from "./authorsRoutes.js";
-import books from "./booksRoutes.js";
+import express from "express"
+import authors from "./authorsRoutes.js"
+import books from "./booksRoutes.js"
 
 const routes = (app) => {
     app.route('/').get((req, res) => {
-        res.status(200).send('Bookshelfie');
+        res.status(200).send('Bookshelfie')
     })
 
     app.use(express.json())
@@ -12,4 +12,4 @@ const routes = (app) => {
     app.use('/authors', authors)
 }
 
-export default routes;
+export default routes

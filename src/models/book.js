@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const bookSchema = new mongoose.Schema(
   {
@@ -17,6 +17,6 @@ const bookSchema = new mongoose.Schema(
   }
 )
 
-const books = mongoose.model('books', bookSchema)
+const Book = mongoose.model('books', bookSchema)
 
-export default books;
+export default Book

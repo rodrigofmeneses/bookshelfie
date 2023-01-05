@@ -1,7 +1,7 @@
-import express from "express";
-import AuthorController from "../controllers/authorsController.js";
+import express from "express"
+import AuthorController from "../controllers/authorsController.js"
 
-const router = express.Router();
+const router = express.Router()
 
 router
   .get("", AuthorController.getAuthors)
@@ -9,6 +9,6 @@ router
   .get("/:id/books", AuthorController.getBooksByAuthor)
   .post("", AuthorController.addAuthor)
   .put("/:id", AuthorController.updateAuthor)
-  .delete("/:id", AuthorController.removeAuthor);
+  .delete("/:id", AuthorController.removeAuthor)
 
-export default router;
+export default router

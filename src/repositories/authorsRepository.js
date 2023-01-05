@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
-import authors from "../models/author.js"
-import books from "../models/book.js"
+import Author from "../models/author.js"
+import Book from "../models/book.js"
 
 const AuthorRepository = {
     /**
@@ -9,7 +9,7 @@ const AuthorRepository = {
 
     async findAll() {
         try {
-            return authors.find()
+            return Author.find()
         } catch (error) {
             return error
         }
@@ -17,7 +17,7 @@ const AuthorRepository = {
 
     async findById(id) {
         try {
-            return authors.findById(id)
+            return Author.findById(id)
         } catch (error) {
             return error
         }
@@ -25,7 +25,7 @@ const AuthorRepository = {
 
     async findBooksByAuthorId(id) {
         try {
-            return books.find({ 'author': mongoose.Types.ObjectId(id) }).populate('author')
+            return Book.find({ 'author': mongoose.Types.ObjectId(id) }).populate('author')
         } catch (error) {
             return error
         }
@@ -33,7 +33,7 @@ const AuthorRepository = {
 
     async create(data) {
         try {
-            return new authors(data).save()
+            return new Author(data).save()
         } catch (error) {
             return error
         }
@@ -41,7 +41,7 @@ const AuthorRepository = {
 
     async update(id, data) {
         try {
-            return authors.findByIdAndUpdate(id, { $set: data }, { returnDocument: 'after' })
+            return Author.findByIdAndUpdate(id, { $set: data }, { returnDocument: 'after' })
         } catch (error) {
             return error
         }
@@ -49,7 +49,7 @@ const AuthorRepository = {
 
     async delete(id) {
         try {
-            return authors.findByIdAndDelete(id)
+            return Author.findByIdAndDelete(id)
         } catch (error) {
             return error
         }

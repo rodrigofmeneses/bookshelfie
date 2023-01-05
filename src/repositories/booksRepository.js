@@ -1,4 +1,4 @@
-import books from "../models/book.js"
+import Book from "../models/book.js"
 
 const BookRepository = {
   /**
@@ -7,8 +7,7 @@ const BookRepository = {
 
   async findAll() {
     try {
-      // const result = await books.find().populate("author")
-      return books.find().populate("author")
+      return Book.find().populate("author")
     } catch (error) {
       return error
     }
@@ -16,7 +15,7 @@ const BookRepository = {
 
   async findById(id) {
     try {
-      return books.findById(id).populate('author', 'name')
+      return Book.findById(id).populate('author', 'name')
     } catch (error) {
       return error
     }
@@ -24,7 +23,7 @@ const BookRepository = {
 
   async create(data) {
     try {
-      const book = new books(data)
+      const book = new Book(data)
       return book.save()
     } catch (error) {
       return error
@@ -33,7 +32,7 @@ const BookRepository = {
 
   async update(id, data) {
     try {
-      return books.findByIdAndUpdate(id, { $set: data }, { returnDocument: 'after' }).populate('author')
+      return Book.findByIdAndUpdate(id, { $set: data }, { returnDocument: 'after' }).populate('author')
     } catch (error) {
       return error
     }
@@ -41,7 +40,7 @@ const BookRepository = {
 
   async delete(id) {
     try {
-      return books.findByIdAndDelete(id).populate('author')
+      return Book.findByIdAndDelete(id).populate('author')
     } catch (error) {
       return error
     }

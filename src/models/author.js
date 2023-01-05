@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const authorSchema = new mongoose.Schema(
   {
@@ -11,6 +11,6 @@ const authorSchema = new mongoose.Schema(
   }
 )
 
-const authors = mongoose.model('authors', authorSchema)
+const Author = mongoose.model('authors', authorSchema)
 
-export default authors
+export default Author

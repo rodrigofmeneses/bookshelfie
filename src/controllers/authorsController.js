@@ -15,7 +15,7 @@ const AuthorController = {
   },
 
   async getAuthor(req, res) {
-    const id = req.params.id;
+    const id = req.params.id
     try {
       const result = await AuthorService.findAuthorById(id)
       res.status(200).json(result)
@@ -25,7 +25,7 @@ const AuthorController = {
   },
 
   async getBooksByAuthor(req, res) {
-    const id = req.params.id;
+    const id = req.params.id
     try {
       const result = await AuthorService.findBooksByAuthorId(id)
       res.status(200).json(result)
@@ -36,9 +36,9 @@ const AuthorController = {
   },
 
   async addAuthor(req, res) {
-    const body = req.body;
+    const body = req.body
     try {
-      const result = await AuthorService.addAuthor(body);
+      const result = await AuthorService.addAuthor(body)
       res.status(201).json(result)
     } catch (error) {
       res.status(400).json({ message: `Error to add author - ${error.message}` })
@@ -46,10 +46,10 @@ const AuthorController = {
   },
 
   async updateAuthor(req, res) {
-    const id = req.params.id;
-    const body = req.body;
+    const id = req.params.id
+    const body = req.body
     try {
-      const result = await AuthorService.updateAuthor(id, body);
+      const result = await AuthorService.updateAuthor(id, body)
       res.status(200).json(result)
     } catch (error) {
       res.status(400).json({ message: `Error to update author - ${error.message}` })
@@ -57,9 +57,9 @@ const AuthorController = {
   },
 
   async removeAuthor(req, res) {
-    const id = req.params.id;
+    const id = req.params.id
     try {
-      const result = await AuthorService.removeAuthor(id);
+      const result = await AuthorService.removeAuthor(id)
       if (!result) {
         res.status(404).json({ message: `Author not found` })
       }
