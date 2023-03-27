@@ -1,4 +1,4 @@
-import Book from "../models/book.js"
+import { Book } from '../models/index.js'
 
 const BookRepository = {
   /**
@@ -7,7 +7,7 @@ const BookRepository = {
 
   async findAll() {
     try {
-      return Book.find().populate("author")
+      return Book.find().populate('author')
     } catch (error) {
       return error
     }
@@ -32,7 +32,11 @@ const BookRepository = {
 
   async update(id, data) {
     try {
-      return Book.findByIdAndUpdate(id, { $set: data }, { returnDocument: 'after' }).populate('author')
+      return Book.findByIdAndUpdate(
+        id,
+        { $set: data },
+        { returnDocument: 'after' }
+      ).populate('author')
     } catch (error) {
       return error
     }
@@ -44,7 +48,7 @@ const BookRepository = {
     } catch (error) {
       return error
     }
-  }
+  },
 }
 
 export default BookRepository

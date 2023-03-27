@@ -1,4 +1,4 @@
-import AuthorRepository from "../repositories/authorsRepository.js"
+import { AuthorRepository } from '../repositories/index.js'
 
 const AuthorService = {
   /**
@@ -15,7 +15,7 @@ const AuthorService = {
 
   async findAuthorById(id) {
     try {
-      // validation and sanityze user data
+      // validation and sanitize user data
       return AuthorRepository.findById(id)
     } catch (error) {
       return error
@@ -32,7 +32,7 @@ const AuthorService = {
 
   async addAuthor(body) {
     try {
-      // validation and sanityze user data
+      // validation and sanitize user data
       return AuthorRepository.create(body)
     } catch (error) {
       return error
@@ -41,7 +41,7 @@ const AuthorService = {
 
   async updateAuthor(id, body) {
     try {
-      // validation and sanityze user data
+      // validation and sanitize user data
       return AuthorRepository.update(id, body)
     } catch (error) {
       return error
@@ -50,12 +50,12 @@ const AuthorService = {
 
   async removeAuthor(id) {
     try {
-      // validation and sanityze user data
+      // validation and sanitize user data
       return AuthorRepository.delete(id)
     } catch (error) {
       return error
     }
-  }
+  },
 }
 
 export default AuthorService

@@ -1,4 +1,4 @@
-import BookService from "../services/booksService.js"
+import { BookService } from '../services/index.js'
 
 const BookController = {
   /**
@@ -10,7 +10,7 @@ const BookController = {
       const result = await BookService.findAllBooks()
       res.status(200).json(result)
     } catch (error) {
-      res.status(500).json({ message: "Something Wrong" })
+      res.status(500).json({ message: 'Something Wrong' })
     }
   },
 
@@ -38,7 +38,9 @@ const BookController = {
       const result = await BookService.updateBook(req.params.id, req.body)
       res.status(200).json(result)
     } catch (error) {
-      res.status(400).json({ message: `Error to update book - ${error.message}` })
+      res
+        .status(400)
+        .json({ message: `Error to update book - ${error.message}` })
     }
   },
 
@@ -50,10 +52,11 @@ const BookController = {
       }
       res.status(200).json(result)
     } catch (error) {
-      res.status(400).json({ message: `Error to remove book - ${error.message}` })
+      res
+        .status(400)
+        .json({ message: `Error to remove book - ${error.message}` })
     }
-  }
-
+  },
 }
 
 export default BookController

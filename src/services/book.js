@@ -1,4 +1,4 @@
-import BookRepository from "../repositories/booksRepository.js"
+import BookRepository from '../repositories/book.js'
 
 const BookService = {
   /**
@@ -47,7 +47,7 @@ const BookService = {
     } catch (error) {
       return error
     }
-  }
+  },
 }
 
 export default BookService

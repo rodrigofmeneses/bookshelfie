@@ -1,4 +1,4 @@
-import AuthorService from "../services/authorsService.js"
+import { AuthorService } from '../services/index.js'
 
 const AuthorController = {
   /**
@@ -10,7 +10,7 @@ const AuthorController = {
       const result = await AuthorService.findAllAuthors()
       res.status(200).json(result)
     } catch (error) {
-      res.status(500).json({ message: "Something Wrong" })
+      res.status(500).json({ message: 'Something Wrong' })
     }
   },
 
@@ -32,7 +32,6 @@ const AuthorController = {
     } catch (error) {
       res.status(404).json({ message: `Author not found - ${error.message}` })
     }
-
   },
 
   async addAuthor(req, res) {
@@ -41,7 +40,9 @@ const AuthorController = {
       const result = await AuthorService.addAuthor(body)
       res.status(201).json(result)
     } catch (error) {
-      res.status(400).json({ message: `Error to add author - ${error.message}` })
+      res
+        .status(400)
+        .json({ message: `Error to add author - ${error.message}` })
     }
   },
 
@@ -52,7 +53,9 @@ const AuthorController = {
       const result = await AuthorService.updateAuthor(id, body)
       res.status(200).json(result)
     } catch (error) {
-      res.status(400).json({ message: `Error to update author - ${error.message}` })
+      res
+        .status(400)
+        .json({ message: `Error to update author - ${error.message}` })
     }
   },
 
@@ -65,9 +68,11 @@ const AuthorController = {
       }
       res.status(200).json(result)
     } catch (error) {
-      res.status(400).json({ message: `Error to remove author - ${error.message}` })
+      res
+        .status(400)
+        .json({ message: `Error to remove author - ${error.message}` })
     }
-  }
+  },
 }
 
 export default AuthorController
