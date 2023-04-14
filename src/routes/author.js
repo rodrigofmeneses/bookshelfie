@@ -3,11 +3,11 @@ import { AuthorController } from '../controllers/index.js'
 const router = express.Router()
 
 router
-  .get('', AuthorController.getAuthors)
-  .get('/:id', AuthorController.getAuthor)
-  .get('/:id/books', AuthorController.getBooksByAuthor)
-  .post('', AuthorController.addAuthor)
-  .put('/:id', AuthorController.updateAuthor)
-  .delete('/:id', AuthorController.removeAuthor)
+  .get('/authors', AuthorController.getAuthors)
+  .get('/authors/:id', AuthorController.getAuthor)
+  .get('/authors/:id/books', AuthorController.getBooksByAuthor)
+  .post('/authors', AuthorController.addAuthor)
+  .put('/authors/:id', AuthorController.updateAuthor)
+  .delete('/authors/:id', AuthorController.removeAuthor)
 
 export default router

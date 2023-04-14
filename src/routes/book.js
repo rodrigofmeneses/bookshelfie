@@ -4,10 +4,10 @@ import { BookController } from '../controllers/index.js'
 const router = express.Router()
 
 router
-  .get('', BookController.getBooks)
-  .get('/:id', BookController.getBook)
-  .post('', BookController.addBook)
-  .put('/:id', BookController.updateBook)
-  .delete('/:id', BookController.removeBook)
+  .get('/books', BookController.getBooks)
+  .get('/books/:id', BookController.getBook)
+  .post('/books', BookController.addBook)
+  .put('/books/:id', BookController.updateBook)
+  .delete('/books/:id', BookController.removeBook)
 
 export default router
